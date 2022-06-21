@@ -9,6 +9,6 @@
 - [x] El código completo 💻
 - [x] El diagrama de flujo del *programa principal* y el grafo del mismo. ✍
 - [x] El diagrama de flujo y grafos de las *funciones* utilizadas en el programa. ⚙
-- [x] Los caminos posibles 🚶‍♂️
+- [x] Los caminos posibles de ambos 🚶‍♂️
 - [x] Los casos de prueba 📝
 #
