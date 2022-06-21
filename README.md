@@ -1,6 +1,14 @@
-# TRABAJO-PRACTICO-FINAL-
-## Grupo 10, Abigail Barbieri y Natalia Curual, Introduccion a la Ingenieria en Computacion comision 2
-
-En el repositorio se encuentran el código completo, el diagrama de flujo del programa principal y el grafo del mismo.
-Aparte estan los diagramas de flujo y grafos de las funciones utilizadas en el programa.
-Se incluyen también los caminos posibles y casos de prueba.
+# TRABAJO PRACTICO FINAL
+## Grupo 10 
+### Introduccion a la Ingenieria en Computacion comision 2
+### Alumnos: Abigail Barbieri y Natalia Curual
+### Github users: @absss03 & @naticurual 
+#
+#
+### En el repositorio se encuentran:
+- [x] El código completo 💻
+- [x] El diagrama de flujo del *programa principal* y el grafo del mismo. ✍
+- [x] El diagrama de flujo y grafos de las *funciones* utilizadas en el programa. ⚙
+- [x] Los caminos posibles 🚶‍♂️
+- [x] Los casos de prueba 📝
+#
