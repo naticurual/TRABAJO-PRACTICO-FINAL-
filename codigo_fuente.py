@@ -8,11 +8,11 @@ cuenta = 98765
 
 opcion_menu_principal=0
 mensaje_menu_principal = "\n--------------- \n1. Consultas \n2. Retiros \n3. Transferencias \n4. Salir \n--------------- \nelija opcion >> "
-mensaje_menu_opcion_1 = "\n--------------- \nA - Posicion Global \nB - Movimientos \n--------------- \nelija opcion >> "
-mensaje_menu_opcion_3 = "\n--------------- \nA - Indique numero de cuenta destino \nB - volver  \n--------------- \nelija opcion >> "
+mensaje_menu_opcion_1 = "\n--------------- \n1 - Posicion Global \n2 - Movimientos \n--------------- \nelija opcion >> "
+mensaje_menu_opcion_3 = "\n--------------- \n1 - Indique numero de cuenta destino \n2 - volver  \n--------------- \nelija opcion >> "
 
-gastos=['INGRESO - DEPOSITO','EGRESO - SUPERMERCADO','EGRESO - CARNICERIA','EGRESO - EXTRACCION','EGRESO - RESTAURANTE','EGRESO - ZAPATERIA','EGRESO - TRANSFERENCIA','EGRESO - MASCOTERIA','INGRESO - TRANSFERENCIA','EGRESO - FARMACIA']
-tipo_de_moneda= "-------------\nA.Pesos\nB.Soles\n------------ \nSeleccione el tipo de moneda>> "
+movimientos_aleatorios=['INGRESO - DEPOSITO','EGRESO - SUPERMERCADO','EGRESO - CARNICERIA','EGRESO - EXTRACCION','EGRESO - RESTAURANTE','EGRESO - ZAPATERIA','EGRESO - TRANSFERENCIA','EGRESO - MASCOTERIA','INGRESO - TRANSFERENCIA','EGRESO - FARMACIA']
+tipo_de_moneda= "-------------\n1.Pesos\n2.Soles\n------------ \nSeleccione el tipo de moneda>> "
 
 saldo_pesos = 85000
 saldo_soles = 3564
@@ -22,18 +22,6 @@ devolucion_pesos=0
 devolucion_soles=0
 regresiva = 10
 
-def prsiona_boton():
-    ''' 
-    Esta funcion confirma que se haya presionado la tecla enter.
-    '''
-    x=not input('presiona el boton de activación para continuar... \n>')
-    while x==False:
-        print("tecla incorrecta")
-        x=not input('presiona enter para continuar...')
-    else: 
-        x=True
-
-    return x
 # ------------------------------
 def selecciona_moneda():
     ''' 
@@ -44,10 +32,10 @@ def selecciona_moneda():
 
     while eleccion:
         opcion=input(tipo_de_moneda)
-        if opcion=='A':
+        if opcion=='1':
             moneda='Pesos'
             eleccion=False
-        if opcion=='B':
+        if opcion=='2':
             moneda='Soles'
             eleccion=False
 
@@ -57,15 +45,15 @@ def confirma(texto):
     '''
     Esta funcion sirve para mostrar un mensaje que se reponde con si o no y devuelve la eleccion del usuario.
     '''
-    texto_impresion= f"Desea {texto} Si o No (S/N):"
+    texto_impresion= f"Desea {texto} Si o No (1/0):"
     opcion=' '
     eleccion=True
 
     while eleccion:
         opcion=input(texto_impresion)
-        if opcion=='S':
+        if opcion=='1':
             eleccion=False
-        if opcion=='N':
+        if opcion=='0':
             eleccion=False
     
     return opcion
@@ -115,7 +103,7 @@ def retira_monto(saldo_temp):
     if monto_a_retirar <= saldo_temp:
         if solicita_clave():
             saldo_temp-=monto_a_retirar
-            if confirma('imprimir') == "N":
+            if confirma('imprimir') == "0":
                 print("Transaccion realizada con exito")
             else:
                 print("Su comprobante de Saldo se esta imprimiendo ...")
@@ -135,22 +123,22 @@ def menu_opcion_1(saldo_pesos_temp, saldo_soles_temp):
     '''
     opcion_ingresada=input(mensaje_menu_opcion_1)
 
-    if opcion_ingresada == "A": # Posicion Global o Saldo
+    if opcion_ingresada == "1": # Posicion Global o Saldo
         moneda_elegida_temp = selecciona_moneda()
         if moneda_elegida_temp=='Pesos': 
-            if confirma('imprimir') == "N":
+            if confirma('imprimir') == "0":
                 print(f"Su saldo disponible en {moneda_elegida_temp} es de: ${saldo_pesos_temp}")
             else:
                 print("Su comprobante de Saldo se esta imprimiendo ...")
         elif moneda_elegida_temp =='Soles':
-            if confirma('imprimir') == "N":
+            if confirma('imprimir') == "0":
                 print(f"Su saldo disponible en {moneda_elegida_temp} es de: ${saldo_soles_temp}")
             else:
                 print("Su comprobante de Saldo se esta imprimiendo ...")
 
-    elif opcion_ingresada == "B": # Movimientos (al azar)
+    elif opcion_ingresada == "2": # Movimientos (al azar)
         moneda_elegida_temp = selecciona_moneda()
-        if confirma('imprimir') == "N":                                 #Si no quiere imprimir puede ver los movimientos por pantalla
+        if confirma('imprimir') == "0":                                 #Si no quiere imprimir puede ver los movimientos por pantalla
             print(f"Sus movimientos en {moneda_elegida_temp} son:")
             if devolucion > 0:
                 if moneda_elegida_temp == 'Pesos':
@@ -160,7 +148,7 @@ def menu_opcion_1(saldo_pesos_temp, saldo_soles_temp):
                     print(f"---> INGRESO $ {devolucion_soles} POR TRANSFERENCIA FALLIDA")
                     saldo_soles_temp += devolucion_soles
             for i in range(10):
-                print(f"--->    {gastos[random.randint(0,9)]} : ${round(random.uniform(0.00, 9999.99),2)}")
+                print(f"--->    {movimientos_aleatorios[random.randint(0,9)]} : ${round(random.uniform(0.00, 9999.99),2)}")
         else:                 #Si pide imprimir no vera los movimientos... se "simula" que se impime un tiket
             print("Su comprobante de Saldo se esta imprimiendo ...")
     else:
@@ -175,7 +163,7 @@ def menu_opcion_2(saldo_temp):
     '''
     saldo_temp, error = retira_monto(saldo_temp)
     if error != 0:     #Si se cumple es o porque el monto exede el saldo o porque la contraseña es incorrecta
-        if confirma('salir') == "N":                #El monto exede el saldo, ¿quiere salir?
+        if confirma('salir') == "0":                #El monto exede el saldo, ¿quiere salir?
             retira_monto(saldo_temp)
 
     return saldo_temp
@@ -209,8 +197,6 @@ def menu_opcion_3(saldo_pesos_temp, saldo_soles_temp):
 
     return saldo_temp, devolucion_temp, moneda_elegida_temp
 
-if prsiona_boton():
-    print('._______________________.  \n|                       |   \n| BIENVENIDO AL CAJERO  |   \n| AUTOMATICO INTERBANCA | \n|_______________________|')
 # -------------------------------------------------------------------
 # Main
 #
